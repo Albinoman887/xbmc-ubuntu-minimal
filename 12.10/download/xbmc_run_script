@@ -30,9 +30,9 @@ do
 	initctl emit starting-x
 
 	if [ "$(whoami)" == "root" ] ; then
-		su xbmc -c "startx -- -br > /dev/null 2>&1" -l
+		su xbmc -c "startx -- -br -nolisten tcp > /dev/null 2>&1" -l
 	else
-		startx -- -br > /dev/null 2>&1
+		startx -- -nolisten tcp -br > /dev/null 2>&1
 	fi
 
 	if [ -e /tmp/noRestartXBMC ] ; then
