@@ -433,8 +433,8 @@ function installOscam()
 
 function installXbmc()
 {
-    showInfo "Installing XBMC..."
-    IS_INSTALLED=$(aptInstall xbmc)
+    showInfo "Installing KODI..."
+    IS_INSTALLED=$(aptInstall kodi)
 }
 
 function installXbmcAddonRepositoriesInstaller()
