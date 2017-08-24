@@ -336,8 +336,12 @@ function distUpgrade()
 
 function installXinit()
 {
-    showInfo "Installing xinit..."
+    showInfo "Installing xorg/xinit..."
     IS_INSTALLED=$(aptInstall xinit)
+     if [ "$DISTRIB_RELEASE" == "16.04" ]; then
+    IS_INSTALLED=$(aptInstall dbus-x11)
+    IS_INSTALLED=$(aptInstall xserver-xorg-legacy)
+    fi
 }
 
 function installPowerManagement()
