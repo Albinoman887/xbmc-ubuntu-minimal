@@ -842,7 +842,11 @@ function reconfigureXServer()
     showInfo "Configuring X-server..."
     handleFileBackup "$XWRAPPER_FILE" 1
     createFile "$XWRAPPER_FILE" 1 1
+        if [ "$DISTRIB_RELEASE" == "16.04" ]; then
+        echo -e "allowed_users=anybody\nneeds_root_rights=yes" >> /etc/X11/Xwrapper.config
+        else
 	appendToFile "$XWRAPPER_FILE" "allowed_users=anybody"
+        fi
 	showInfo "X-server successfully configured"
 }
 
