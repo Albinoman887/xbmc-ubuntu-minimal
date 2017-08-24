@@ -767,11 +767,11 @@ function installXbmcBootScreen()
     showInfo "Installing XBMC boot screen (please be patient)..."
     sudo apt-get install -y plymouth-label v86d > /dev/null
     createDirectory "$TEMP_DIRECTORY" 1 0
-    download $DOWNLOAD_URL"plymouth-theme-xbmc-logo.deb"
+    download $DOWNLOAD_URL"plymouth-theme-kodi-animated-logo.deb"
     
-    if [ -e $TEMP_DIRECTORY"plymouth-theme-xbmc-logo.deb" ]; then
-        sudo dpkg -i $TEMP_DIRECTORY"plymouth-theme-xbmc-logo.deb" > /dev/null 2>&1
-        update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/xbmc-logo/xbmc-logo.plymouth 100 > /dev/null 2>&1
+    if [ -e $TEMP_DIRECTORY"plymouth-theme-kodi-animated-logo.deb" ]; then
+        sudo dpkg -i $TEMP_DIRECTORY"plymouth-theme-kodi-animated-logo.deb" > /dev/null 2>&1
+        #update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/xbmc-logo/xbmc-logo.plymouth 100 > /dev/null 2>&1
         handleFileBackup "$INITRAMFS_SPLASH_FILE" 1 1
         createFile "$INITRAMFS_SPLASH_FILE" 1 1
         appendToFile "$INITRAMFS_SPLASH_FILE" "FRAMEBUFFER=y"
