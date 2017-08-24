@@ -22,6 +22,7 @@ XBMC_USERDATA_DIR=$HOME_DIRECTORY".xbmc/userdata/"
 XBMC_KEYMAPS_DIR=$XBMC_USERDATA_DIR"keymaps/"
 XBMC_ADVANCEDSETTINGS_FILE=$XBMC_USERDATA_DIR"advancedsettings.xml"
 XBMC_INIT_CONF_FILE="/etc/init/xbmc.conf"
+XBMC_SYSTEMD_CONF_FILE="/etc/systemd/system/kodi.service"
 XBMC_XSESSION_FILE="/home/xbmc/.xsession"
 UPSTART_JOB_FILE="/lib/init/upstart-job"
 XWRAPPER_FILE="/etc/X11/Xwrapper.config"
@@ -698,6 +699,26 @@ function removeAutorunFiles()
 
 function installXbmcUpstartScript()
 {
+     if [ "$DISTRIB_RELEASE" == "16.04" ]; then
+      #systemd
+         removeAutorunFiles
+    showInfo "Installing KODI systemd autorun support..."
+    createDirectory "$TEMP_DIRECTORY" 1 0
+	download $DOWNLOAD_URL"kodi.service"
+
+	if [ -e $TEMP_DIRECTORY"kodi.service" ]; then
+	    IS_MOVED=$(move $TEMP_DIRECTORY"kodi.service" "$XBMC_SYSTEMD_CONF_FILE")
+
+	    if [ "$IS_MOVED" == "1" ]; then
+	        #sudo ln -s "$UPSTART_JOB_FILE" "$XBMC_INIT_FILE" > /dev/null 2>&1
+                systemctl enable kodi
+	    else
+	        showError "KODI systemd configuration failed"
+	    fi
+	else
+	    showError "Download of KODI systemd configuration file failed"
+	fi
+else
     removeAutorunFiles
     showInfo "Installing XBMC upstart autorun support..."
     createDirectory "$TEMP_DIRECTORY" 1 0
@@ -714,6 +735,7 @@ function installXbmcUpstartScript()
 	else
 	    showError "Download of XBMC upstart configuration file failed"
 	fi
+fi
 }
 
 function installNyxBoardKeymap()
