@@ -338,9 +338,9 @@ function installXinit()
 {
     showInfo "Installing xorg/xinit..."
     IS_INSTALLED=$(aptInstall xinit)
-     if [ "$DISTRIB_RELEASE" == "16.04" ]; then
-    IS_INSTALLED=$(aptInstall dbus-x11)
-    IS_INSTALLED=$(aptInstall xserver-xorg-legacy)
+    if [ "$DISTRIB_RELEASE" == "16.04" ]; then
+    sudo apt-get install -y dbus-x11 > /dev/null 2>&1
+    sudo apt-get install -y xserver-xorg-legacy > /dev/null 2>&1
     fi
 }
 
