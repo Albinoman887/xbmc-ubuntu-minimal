@@ -583,9 +583,8 @@ function selectNvidiaDriver()
         --radiolist "Some driver versions play nicely with different cards, Please choose one!" 
         15 $DIALOG_WIDTH 6)
         
-   options=(1 "304.88 - ubuntu LTS default (default)" on
-            2 "319.xx - Shipped with OpenELEC" off
-            3 "331.xx - latest (will install additional x-swat ppa)" off)
+   options=(1 "304.xx - Legacy (default)" on
+            2 "375.xx - Shipped with OpenELEC" off)
          
     choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -594,11 +593,7 @@ function selectNvidiaDriver()
                 VIDEO_DRIVER="nvidia-current"
             ;;
         2)
-                VIDEO_DRIVER="nvidia-319-updates"
-            ;;
-        3)
-                addXswatPpa
-                VIDEO_DRIVER="nvidia-331"
+                VIDEO_DRIVER="nvidia-375 nvidia-opencl-icd-375 --no-install-recommends"
             ;;
         *)
                 selectNvidiaDriver
