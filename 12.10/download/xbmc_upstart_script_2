@@ -1,8 +1,8 @@
-# xbmc standalone service
+# kodi standalone service
 
-# starts XBMC on startup by using xinit.
+# starts KODI on startup by using xinit.
 # will try to auto respawn for 5 mins if it crashes
-# launches xbmc in the "standalone mode" with no xcursor (cursor in xbmc still works)
+# launches kodi in the "standalone mode" with no xcursor (cursor in kodi still works)
 # by default runs as xbmc, to change edit below.
 env USER=xbmc
 
@@ -20,5 +20,5 @@ respawn limit 10 5
 limit nice 21 21
 
 script
-  exec su -c "xinit /usr/bin/xbmc --standalone -- -bs -nocursor :0" $USER
+  exec su -c "xinit /usr/bin/kodi-standalone -- -bs -nocursor :0" $USER
 end script
