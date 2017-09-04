@@ -593,7 +593,7 @@ function selectNvidiaDriver()
                 VIDEO_DRIVER="nvidia-current"
             ;;
         2)
-                VIDEO_DRIVER="nvidia-375 nvidia-opencl-icd-375 --no-install-recommends"
+                VIDEO_DRIVER="nvidia-375 nvidia-opencl-icd-375 libcuda1-375 --no-install-recommends"
             ;;
         *)
                 selectNvidiaDriver
